@@ -6,6 +6,8 @@ All notable changes to ESP-VISION are recorded here. The format follows [Keep a 
 
 ### Added
 
+- Added the `FREENOVE_ESP32_S3_WROOM` board (ESP32-S3, 16 MiB flash, 8 MiB OPI PSRAM, GC2145 DVP camera, SD card, no built-in display) with QQVGA/QVGA/VGA/SVGA capture. The board reaches the host only through its CH343 UART bridge, and EV-MUX remains disabled at boot; run `sensor.evmux(True)` to enable host tooling.
+
 - Device Core 0.1.1 exports passive Node TCP/serial adapters at `/node` and ships its unit/hardware check assets; installed-package validation executes the tests and provider-backed discovery from a clean consumer.
 
 - Official release artifacts now include application-only update images and per-board/version metadata (SHA-256, partition layout and silicon revision bounds) for automatic Device Core/CLI updates from dl.espressif.com.

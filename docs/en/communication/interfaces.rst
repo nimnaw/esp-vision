@@ -76,12 +76,12 @@ Backends depend on ``boards/<BOARD>/boardconfig.h``, ``boards/<BOARD>/port/mpcon
      - ``ESP32_S3_EYE``, ``ESP32_S31_KORVO``, ``ESP32_S31_MOSAICO``, ``AtomS3R-M12``; P4 boards may expose both CDC and USJ according to SoC support.
    * - ``uart``
      - ``MICROPY_HW_ENABLE_UART_REPL`` enabled, using board pins/baud rate.
-     - Enabled on P4, ``ESP32_S3_EYE``, ``AtomS3R-M12``, ``ESP32_S31_KORVO``; currently disabled on ``ESP32_S31_MOSAICO`` and ``ESP32_S31_CHATBOT``.
+     - Enabled on P4, ``ESP32_S3_EYE``, ``AtomS3R-M12``, ``ESP32_S31_KORVO`` and ``FREENOVE_ESP32_S3_WROOM`` (UART-only board); currently disabled on ``ESP32_S31_MOSAICO`` and ``ESP32_S31_CHATBOT``.
    * - ``tcp``
      - ``ESP_VISION_ENABLE_TCP_TRANSPORT=1`` with an available WLAN driver.
      - Listener requires STA IPv4. Current ``ESP32_P4X_VISION`` port configuration disables WLAN; compiling TCP does not prove runtime network availability.
 
-Examples are ``boards/ESP32_P4X_EYE/boardconfig.h``, ``boards/ESP32_S3_EYE/boardconfig.h`` and ``boards/ESP32_S31_MOSAICO/port/mpconfigboard.h``; ``platform/ev_transport_config.h`` checks backend constraints.
+Examples are ``boards/ESP32_P4X_EYE/boardconfig.h``, ``boards/ESP32_S3_EYE/boardconfig.h`` and ``boards/ESP32_S31_MOSAICO/port/mpconfigboard.h``; ``platform/ev_transport_config.h`` checks backend constraints. ``FREENOVE_ESP32_S3_WROOM`` exposes only the CH343 UART link and disables EV-MUX at boot; run ``sensor.evmux(True)`` before connecting a host session.
 
 Distinguishing USB-Serial/JTAG from USB-OTG
 -------------------------------------------

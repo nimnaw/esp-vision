@@ -73,13 +73,12 @@ idf_component_register(
         "${CMAKE_BINARY_DIR}"
 )
 
-set(IMLIB_MICROPY_GENHDRS
-    "${CMAKE_BINARY_DIR}/genhdr/qstrdefs.generated.h"
-    "${CMAKE_BINARY_DIR}/genhdr/compressed.data.h"
-)
-
-add_custom_target(imlib_micropython_genhdr DEPENDS ${IMLIB_MICROPY_GENHDRS})
-add_dependencies(${COMPONENT_LIB} imlib_micropython_genhdr)
+# The target is created by the generated MicroPython port before components
+# are registered, because the qstr generation rules live in that directory
+# scope. Depend on it here so imlib compiles after the generated headers exist.
+if(TARGET imlib_micropython_genhdr)
+    add_dependencies(${COMPONENT_LIB} imlib_micropython_genhdr)
+endif()
 
 target_compile_definitions(${COMPONENT_LIB} PRIVATE
     CMSIS_MCU_H="cmsis_compiler.h"

@@ -349,6 +349,17 @@ else()
     include(${MICROPY_DIR}/py/mkrules.cmake)
 endif()
 
+# ESP-VISION: imlib needs MicroPython generated headers (qstrdefs.generated.h,
+# moduledefs.h, root_pointers.h) before it can compile. The add_custom_command
+# OUTPUT rules live in py/mkrules.cmake (included just above), which is the
+# same directory scope. Create a target in this scope so the imlib component
+# can depend on it; component targets do not exist yet at this point.
+set(IMLIB_GENHDR_DEPS ${MICROPY_QSTRDEFS_GENERATED})
+if(MICROPY_ROM_TEXT_COMPRESSION)
+    list(APPEND IMLIB_GENHDR_DEPS ${MICROPY_COMPRESSED_DATA})
+endif()
+add_custom_target(imlib_micropython_genhdr DEPENDS ${IMLIB_GENHDR_DEPS})
+
 # Generate source files for named pins (requires mkrules.cmake for MICROPY_GENHDR_DIR).
 
 set(GEN_PINS_PREFIX "${MICROPY_PORT_DIR}/boards/pins_prefix.c")

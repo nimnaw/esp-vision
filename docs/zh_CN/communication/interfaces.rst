@@ -76,12 +76,12 @@ sink 类型与实际 link
      - ``ESP32_S3_EYE``、``ESP32_S31_KORVO``、``ESP32_S31_MOSAICO``、``AtomS3R-M12``；P4 板卡也可依据 SoC 支持同时暴露 CDC 与 USJ。
    * - ``uart``
      - ``MICROPY_HW_ENABLE_UART_REPL`` 启用，使用板级引脚与波特率。
-     - P4、``ESP32_S3_EYE``、``AtomS3R-M12``、``ESP32_S31_KORVO`` 启用；当前 ``ESP32_S31_MOSAICO``、``ESP32_S31_CHATBOT`` 关闭。
+     - P4、``ESP32_S3_EYE``、``AtomS3R-M12``、``ESP32_S31_KORVO`` 和 ``FREENOVE_ESP32_S3_WROOM``（仅 UART 板卡）启用；当前 ``ESP32_S31_MOSAICO``、``ESP32_S31_CHATBOT`` 关闭。
    * - ``tcp``
      - ``ESP_VISION_ENABLE_TCP_TRANSPORT=1``，底层 WLAN 驱动可用。
      - STA 获得 IPv4 后才能监听。当前 ``ESP32_P4X_VISION`` 的 port 配置关闭 WLAN，不能由 TCP 编译开关推断其网络可运行。
 
-板级例子见 ``boards/ESP32_P4X_EYE/boardconfig.h``、``boards/ESP32_S3_EYE/boardconfig.h`` 和 ``boards/ESP32_S31_MOSAICO/port/mpconfigboard.h``；后端约束由 ``platform/ev_transport_config.h`` 检查。
+板级例子见 ``boards/ESP32_P4X_EYE/boardconfig.h``、``boards/ESP32_S3_EYE/boardconfig.h`` 和 ``boards/ESP32_S31_MOSAICO/port/mpconfigboard.h``；后端约束由 ``platform/ev_transport_config.h`` 检查。``FREENOVE_ESP32_S3_WROOM`` 仅提供 CH343 UART 链路，并在启动时关闭 EV-MUX；连接主机会话前请运行 ``sensor.evmux(True)``。
 
 USB-Serial/JTAG 与 USB-OTG 怎么区分
 -----------------------------------

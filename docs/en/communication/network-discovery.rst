@@ -64,7 +64,7 @@ IDE places refresh and discovered-device selection in the existing network conne
 Default-enabled Wi-Fi board policy
 ----------------------------------
 
-Wi-Fi-equipped boards must enable WLAN, ``ESP_VISION_ENABLE_BACKGROUND_NETWORK=1`` and ``ESP_VISION_ENABLE_TCP_TRANSPORT=1`` by default. The current seven Wi-Fi configurations already satisfy this policy: ``ESP32_P4X_EYE`` and ``ESP32_P4X_FUNCTION_EV_BOARD`` use Hosted Wi-Fi; ``ESP32_S3_EYE``, ``AtomS3R-M12``, ``ESP32_S31_CHATBOT``, ``ESP32_S31_KORVO`` and ``ESP32_S31_MOSAICO`` use native Wi-Fi. The two Hosted boards include ``sdkconfig.p4_wifi_common``.
+Wi-Fi-equipped boards must enable WLAN, ``ESP_VISION_ENABLE_BACKGROUND_NETWORK=1`` and ``ESP_VISION_ENABLE_TCP_TRANSPORT=1`` by default. The current eight Wi-Fi configurations already satisfy this policy: ``ESP32_P4X_EYE`` and ``ESP32_P4X_FUNCTION_EV_BOARD`` use Hosted Wi-Fi; ``ESP32_S3_EYE``, ``AtomS3R-M12``, ``FREENOVE_ESP32_S3_WROOM``, ``ESP32_S31_CHATBOT``, ``ESP32_S31_KORVO`` and ``ESP32_S31_MOSAICO`` use native Wi-Fi. The two Hosted boards include ``sdkconfig.p4_wifi_common``.
 
 ``ESP32_P4X_VISION`` currently disables WLAN and has no Hosted Wi-Fi configuration. P4 alone has no native Wi-Fi; confirm an attached radio and its board wiring before enabling this port. ``TEMPLATE`` also remains hardware-dependent. Do not copy Hosted SDIO/reset pins from another board.
 

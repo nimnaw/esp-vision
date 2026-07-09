@@ -64,7 +64,7 @@ IDE 在现有网络连接区域增加刷新和发现设备选择。保留手动 
 Wi-Fi 板卡默认启用策略
 ----------------------
 
-带 Wi-Fi 的板卡默认启用 WLAN、``ESP_VISION_ENABLE_BACKGROUND_NETWORK=1`` 和 ``ESP_VISION_ENABLE_TCP_TRANSPORT=1``。当前七种 Wi-Fi 配置已满足：``ESP32_P4X_EYE`` 和 ``ESP32_P4X_FUNCTION_EV_BOARD`` 使用 Hosted Wi-Fi；``ESP32_S3_EYE``、``AtomS3R-M12``、``ESP32_S31_CHATBOT``、``ESP32_S31_KORVO`` 和 ``ESP32_S31_MOSAICO`` 使用原生 Wi-Fi。两种 Hosted 板卡均包含 ``sdkconfig.p4_wifi_common``。
+带 Wi-Fi 的板卡默认启用 WLAN、``ESP_VISION_ENABLE_BACKGROUND_NETWORK=1`` 和 ``ESP_VISION_ENABLE_TCP_TRANSPORT=1``。当前八种 Wi-Fi 配置已满足：``ESP32_P4X_EYE`` 和 ``ESP32_P4X_FUNCTION_EV_BOARD`` 使用 Hosted Wi-Fi；``ESP32_S3_EYE``、``AtomS3R-M12``、``FREENOVE_ESP32_S3_WROOM``、``ESP32_S31_CHATBOT``、``ESP32_S31_KORVO`` 和 ``ESP32_S31_MOSAICO`` 使用原生 Wi-Fi。两种 Hosted 板卡均包含 ``sdkconfig.p4_wifi_common``。
 
 ``ESP32_P4X_VISION`` 当前关闭 WLAN，且没有 Hosted Wi-Fi 配置。P4 本身没有原生 Wi-Fi，应先确认外接无线模组和板级连线，再启用该 port。``TEMPLATE`` 也依赖具体硬件。不能直接复制其他板卡的 Hosted SDIO/reset 引脚。
 
