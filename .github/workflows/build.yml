@@ -1,0 +1,64 @@
+# SPDX-FileCopyrightText: 2026 Espressif Systems (Shanghai) CO LTD
+# SPDX-License-Identifier: Apache-2.0
+
+name: Build
+
+on:
+  push:
+    branches:
+      - FREENOVE_ESP32_S3_WROOM
+
+jobs:
+  firmware:
+    runs-on: ubuntu-latest
+    container:
+      image: espressif/idf:release-v5.5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+          fetch-depth: 1
+
+      - name: Fix git ownership
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Init submodules
+        run: |
+          git submodule sync -- lib/micropython lib/ulab lib/zxing-cpp
+          git submodule update --init --depth 1 lib/micropython lib/ulab lib/zxing-cpp
+          git -C lib/micropython submodule sync -- lib/micropython-lib
+          git -C lib/micropython submodule update --init --depth 1 lib/micropython-lib
+
+      - name: Setup ninja wrapper
+        run: |
+          REAL_NINJA="$(command -v ninja)"
+          mkdir -p "$GITHUB_WORKSPACE/.ci-bin"
+          printf '#!/bin/sh\nexec "%s" -j 2 "$@"\n' "$REAL_NINJA" > "$GITHUB_WORKSPACE/.ci-bin/ninja"
+          chmod +x "$GITHUB_WORKSPACE/.ci-bin/ninja"
+          echo "$GITHUB_WORKSPACE/.ci-bin" >> "$GITHUB_PATH"
+
+      - name: Setup IDF and Build
+        run: |
+          . /opt/esp/idf/export.sh
+          idf.py --board FREENOVE_ESP32_S3_WROOM build
+
+      - name: Collect logs
+        if: always()
+        run: |
+          if [ -d "build/FREENOVE_ESP32_S3_WROOM" ]; then
+            find "build/FREENOVE_ESP32_S3_WROOM" -path '*/log/idf_py_*_output_*' -type f ! -name '*.txt' | while IFS= read -r log; do
+              mv "$log" "$log.txt"
+            done
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: firmware-FREENOVE_ESP32_S3_WROOM
+          path: |
+            build/FREENOVE_ESP32_S3_WROOM/idf*/log/
+            build/FREENOVE_ESP32_S3_WROOM/idf*/bootloader/bootloader.bin
+            build/FREENOVE_ESP32_S3_WROOM/idf*/partition_table/partition-table.bin
+            build/FREENOVE_ESP32_S3_WROOM/idf*/*.bin
+            build/FREENOVE_ESP32_S3_WROOM/idf*/flash_args
+          retention-days: 7

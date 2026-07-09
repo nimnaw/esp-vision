@@ -1,0 +1,16 @@
+{
+    "deploy": [
+        "../deploy.md"
+    ],
+    "docs": "",
+    "features": [
+        "WiFi",
+        "DVP",
+        "GC2145"
+    ],
+    "mcu": "esp32s3",
+    "product": "Freenove ESP32-S3-WROOM",
+    "thumbnail": "",
+    "url": "https://github.com/Freenove/Freenove_ESP32_S3_WROOM",
+    "vendor": "Freenove"
+}

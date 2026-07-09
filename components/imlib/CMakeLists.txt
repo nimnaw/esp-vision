@@ -73,13 +73,6 @@ idf_component_register(
         "${CMAKE_BINARY_DIR}"
 )
 
-set(IMLIB_MICROPY_GENHDRS
-    "${CMAKE_BINARY_DIR}/genhdr/qstrdefs.generated.h"
-    "${CMAKE_BINARY_DIR}/genhdr/compressed.data.h"
-)
-
-add_custom_target(imlib_micropython_genhdr DEPENDS ${IMLIB_MICROPY_GENHDRS})
-add_dependencies(${COMPONENT_LIB} imlib_micropython_genhdr)
 
 target_compile_definitions(${COMPONENT_LIB} PRIVATE
     CMSIS_MCU_H="cmsis_compiler.h"

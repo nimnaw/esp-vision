@@ -1,0 +1,48 @@
+# ESP-VISION Freenove ESP32-S3-WROOM shared defaults.
+
+# CPU
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_40=
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_80=
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_160=
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_240=y
+CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ=240
+CONFIG_FREERTOS_HZ=1000
+
+# PSRAM: 8MB octal PSRAM on CLK30/CS26 at 40MHz. 80MHz stalls the octal
+# PSRAM timing tuning on this board's clone (BOYA) flash/PSRAM chips, so the
+# frequency is pinned to 40MHz which boots reliably.
+CONFIG_SPIRAM_MODE_QUAD=
+CONFIG_SPIRAM_MODE_OCT=y
+CONFIG_SPIRAM_TYPE_AUTO=y
+CONFIG_SPIRAM_CLK_IO=30
+CONFIG_SPIRAM_CS_IO=26
+CONFIG_SPIRAM_SPEED_80M=
+CONFIG_SPIRAM_SPEED_40M=y
+CONFIG_SPIRAM_SPEED=40
+CONFIG_SPIRAM=y
+CONFIG_SPIRAM_BOOT_INIT=y
+CONFIG_SPIRAM_IGNORE_NOTFOUND=y
+CONFIG_SPIRAM_USE_MALLOC=y
+CONFIG_SPIRAM_MALLOC_ALWAYSINTERNAL=8192
+
+# USB
+CONFIG_ESP_CONSOLE_UART_DEFAULT=y
+CONFIG_ESP_CONSOLE_SECONDARY_NONE=y
+CONFIG_ESP_CONSOLE_SECONDARY_USB_SERIAL_JTAG=
+CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG_ENABLED=
+CONFIG_USJ_ENABLE_USB_SERIAL_JTAG=
+
+# Power management: the DVP camera stream stalls while the CPU light-sleeps
+# (the frame-ready interrupts are not light-sleep wake sources), so a
+# frame wait with nothing else running can block forever instead of timing
+# out. Keep PM off for this camera board.
+# CONFIG_PM_ENABLE is not set
+
+# Camera
+CONFIG_CAMERA_GC2145=y
+# Crop to the requested size instead of subsampling. Subsample mode on this
+# GC2145 delivers 216 of 240 rows at QVGA (FB-SIZE: 138240 != 153600), which
+# makes the esp32-camera driver drop frames and desync the frame queue (stale
+# snapshots -> spurious motion). Windowing crops an exact 320x240 and keeps a
+# stable, full-size frame stream.
+CONFIG_GC_SENSOR_WINDOWING_MODE=y
