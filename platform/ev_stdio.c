@@ -16,6 +16,8 @@
 #include "esp_log.h"
 #include "esp_timer.h"
 
+#include "py/mpconfig.h"
+
 #include "ev_channel.h"
 #include "ev_control_transport.h"
 #include "ev_mux.h"

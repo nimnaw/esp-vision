@@ -42,6 +42,7 @@ idf_component_register(
         "upstream/hough.c"
         "upstream/imlib.c"
         "upstream/integral.c"
+        "upstream/isp.c"
         "upstream/jpegd.c"
         "upstream/jpege.c"
         "upstream/line.c"
