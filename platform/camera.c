@@ -68,6 +68,10 @@ ESP_VISION_WEAK esp_err_t esp_vision_camera_get_framesize_dimensions(esp_vision_
         *width = 640;
         *height = 480;
         return ESP_OK;
+    case ESP_VISION_CAMERA_FRAMESIZE_SVGA:
+        *width = 800;
+        *height = 600;
+        return ESP_OK;
     default:
         return ESP_ERR_NOT_SUPPORTED;
     }

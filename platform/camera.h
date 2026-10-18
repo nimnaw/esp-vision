@@ -22,6 +22,7 @@ typedef enum {
     ESP_VISION_CAMERA_FRAMESIZE_QQVGA = 0,
     ESP_VISION_CAMERA_FRAMESIZE_QVGA,
     ESP_VISION_CAMERA_FRAMESIZE_VGA,
+    ESP_VISION_CAMERA_FRAMESIZE_SVGA,
 } esp_vision_camera_framesize_t;
 
 typedef struct {

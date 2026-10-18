@@ -15,6 +15,7 @@ RGB565: int
 QQVGA: int
 QVGA: int
 VGA: int
+SVGA: int
 
 
 #: Dictionary returned by status().
@@ -66,7 +67,7 @@ def set_pixformat(pixformat: int) -> None: ...
 #: Return the current pixel format constant.
 def get_pixformat() -> int: ...
 #: Select the output frame size.
-#: framesize: sensor.QQVGA, sensor.QVGA, or sensor.VGA when supported by the board.
+#: framesize: sensor.QQVGA, sensor.QVGA, sensor.VGA, or sensor.SVGA when supported by the board.
 def set_framesize(framesize: int) -> None: ...
 #: Return the current frame size constant.
 def get_framesize() -> int: ...
