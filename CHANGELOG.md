@@ -54,6 +54,7 @@ All notable changes to ESP-VISION are recorded here. The format follows [Keep a 
 
 ### Fixed
 
+- Enabled PSRAM DMA and capped the esp32-camera DMA half-buffer at 24 KiB on `FREENOVE_ESP32_S3_WROOM` so VGA/SVGA capture no longer needs a 32 KiB internal DMA buffer that does not fit after Wi-Fi initialization.
 - Corrected bilingual communication guides to distinguish public Core file/Python APIs from low-level helpers, clarified firmware-unit versus Core hardware tests, and kept SDK documentation links within the current documentation version and target.
 
 - Added theme-aware logos and architecture diagrams to both English and Chinese READMEs, with self-contained adaptive SVG fallbacks for GitLab renderers that strip picture sources, responsive 960-pixel logo sizing, and image backgrounds that keep text readable when site and browser themes differ.

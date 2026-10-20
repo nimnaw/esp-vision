@@ -40,6 +40,14 @@ CONFIG_USJ_ENABLE_USB_SERIAL_JTAG=
 
 # Camera
 CONFIG_CAMERA_GC2145=y
+# DMA directly between the DVP peripheral and the PSRAM frame buffers. The
+# default S3 path otherwise allocates a 32 KiB internal DMA buffer, which does
+# not fit after Wi-Fi initializes (largest free block is 31,744 bytes) and
+# makes VGA/SVGA capture fail in cam_dma_config(). Keep the half-buffer ceiling
+# below the internal-block limit as a fallback for configurations that cannot
+# use PSRAM DMA.
+CONFIG_CAMERA_PSRAM_DMA=y
+CONFIG_CAMERA_DMA_BUFFER_SIZE_MAX=24576
 # Crop to the requested size instead of subsampling. Subsample mode on this
 # GC2145 delivers 216 of 240 rows at QVGA (FB-SIZE: 138240 != 153600), which
 # makes the esp32-camera driver drop frames and desync the frame queue (stale

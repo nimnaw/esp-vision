@@ -13,6 +13,7 @@ Board-scoped changelog for the FREENOVE ESP32-S3-WROOM board. This file tracks c
 
 ### Fixed
 
+- Enabled the esp32-camera PSRAM DMA path and capped the DMA half-buffer at 24 KiB so VGA/SVGA capture no longer needs a 32 KiB internal DMA buffer that does not fit after the Wi-Fi stack initializes; the default path failed in `cam_dma_config()` with `ESP_FAIL`.
 - RGB565 capture validation now checks the delivered frame's format, dimensions (against the configured output) and byte length (width × height × 2) before copying, so padded or malformed driver frames are rejected with a diagnostic instead of copied silently.
 - GRAYSCALE captures no longer trigger a Guru Meditation (LoadStoreError): the luma lookup tables were `IRAM_ATTR`, and on ESP32-S3 const data placed in the IRAM window is not data-bus-readable. The tables now live in flash rodata.
 - Boot no longer hangs in the first camera frame wait (`sensor.skip_frames()` / `sensor.snapshot()`): with power management enabled (`CONFIG_PM_ENABLE=y`) the CPU light-sleeps while the MicroPython task blocks on the frame queue, the DVP frame-ready interrupt is not a light-sleep wake source, and the frozen FreeRTOS tick keeps the frame-wait timeout from ever firing. Power management is now disabled for this camera board in `sdkconfig.s3_freenove`.
